@@ -1,0 +1,2899 @@
+agri-labor-1
+
+Buy
+
+
+
+Loading...
+Welcome to Emergent—your launchpad for ambitious apps.
+
+Rural Worker Connect tackles real unemployment gaps in agricultural communities—connecting labor and opportunity at scale. That's infrastructure work, and it needs a platform built production-ready from the start.
+
+Emergent gives you intelligent matching systems, persistent data, and user dashboards that feel like the real product you're building.
+
+I'll set up your core structure now and we'll iterate from there. Let's build.
+
+Now, here's your complete Rural Worker Connect production-grade prototype:
+
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rural Worker Connect - Connecting Farmers & Workers</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="htt...ap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d5016;
+            --secondary: #4a7c2c;
+            --accent: #f4a460;
+            --accent-light: #ffd699;
+            --light-bg: #f8faf5;
+            --dark-bg: #0f1419;
+            --dark-card: #1a2332;
+            --text-light: #2c2c2c;
+            --text-dark: #f0f0f0;
+            --border-color: #e0e0e0;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-light);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--text-dark);
+        }
+
+        /* SCROLLBAR STYLING */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        body.dark-mode ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        body.dark-mode ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+        }
+
+        /* NAVBAR */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode nav {
+            background: rgba(15, 20, 25, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--text-dark);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(20deg);
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 5px 0;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        body.dark-mode .hamburger span {
+            background: var(--text-dark);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.8), rgba(74, 124, 44, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grain" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="30" r="1.5" fill="rgba(255,255,255,0.15)"/></pattern></defs><rect width="1200" height="600" fill="url(%23grain)"/><path d="M0 400 Q300 350 600 400 T1200 400 L1200 600 L0 600 Z" fill="rgba(244,164,96,0.1)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(244, 164, 96, 0.3), transparent);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+            top: -100px;
+            right: -100px;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(74, 124, 44, 0.3), transparent);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+            bottom: -50px;
+            left: -50px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            max-width: 600px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #ff9a4d);
+            color: white;
+            box-shadow: 0 8px 25px rgba(244, 164, 96, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(244, 164, 96, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-small {
+            padding: 0.7rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        body.dark-mode .btn-outline {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        body.dark-mode .btn-outline:hover {
+            background: var(--accent);
+            color: var(--dark-bg);
+        }
+
+        /* STATISTICS SECTION */
+        .stats-section {
+            padding: 4rem 2rem;
+            background: var(--light-bg);
+        }
+
+        body.dark-mode .stats-section {
+            background: var(--dark-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .stat-card {
+            background: var(--dark-card);
+            border-color: rgba(244, 164, 96, 0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .stat-card:hover {
+            box-shadow: 0 15px 40px rgba(244, 164, 96, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0.5rem 0;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+            font-weight: 500;
+        }
+
+        body.dark-mode .stat-label {
+            color: #aaa;
+        }
+
+        /* WORKER REGISTRATION FORM */
+        .form-section {
+            padding: 4rem 2rem;
+            background: white;
+            min-height: 100vh;
+        }
+
+        body.dark-mode .form-section {
+            background: var(--dark-bg);
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .form-container {
+            background: var(--dark-card);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        body.dark-mode label {
+            color: var(--text-dark);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+            color: var(--text-light);
+        }
+
+        body.dark-mode input,
+        body.dark-mode select,
+        body.dark-mode textarea {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-dark);
+            border-color: rgba(244, 164, 96, 0.2);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode select:focus,
+        body.dark-mode textarea:focus {
+            box-shadow: 0 0 0 3px rgba(244, 164, 96, 0.15);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.1), rgba(74, 124, 44, 0.1));
+            border: 2px dashed var(--primary);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-input-label:hover {
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.2), rgba(74, 124, 44, 0.2));
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-form {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(45, 80, 22, 0.3);
+        }
+
+        .btn-reset {
+            background: var(--border-color);
+            color: var(--text-light);
+        }
+
+        .btn-reset:hover {
+            background: #ccc;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #888;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        body.dark-mode .tab-button {
+            color: #aaa;
+        }
+
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* JOB LISTING */
+        .jobs-section {
+            padding: 4rem 2rem;
+            background: var(--light-bg);
+        }
+
+        body.dark-mode .jobs-section {
+            background: var(--dark-bg);
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .filter-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.8rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-family: inherit;
+            background: white;
+            color: var(--text-light);
+        }
+
+        body.dark-mode .filter-input {
+            background: var(--dark-card);
+            color: var(--text-dark);
+            border-color: rgba(244, 164, 96, 0.2);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        body.dark-mode .card {
+            background: var(--dark-card);
+            border-color: rgba(244, 164, 96, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark-mode .card:hover {
+            box-shadow: 0 15px 40px rgba(244, 164, 96, 0.2);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .info-row i {
+            color: var(--accent);
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(45, 80, 22, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        body.dark-mode .badge {
+            background: rgba(244, 164, 96, 0.15);
+            color: var(--accent);
+        }
+
+        .match-percentage {
+            display: inline-block;
+            padding: 0.4rem 0.9rem;
+            background: linear-gradient(135deg, var(--success), #2ecc71);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .card-actions button {
+            flex: 1;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .card-actions .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #ff9a4d);
+            color: white;
+            box-shadow: none;
+        }
+
+        .card-actions .btn-outline {
+            background: rgba(45, 80, 22, 0.05);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        body.dark-mode .card-actions .btn-outline {
+            background: rgba(244, 164, 96, 0.05);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* WORKER PROFILE CARDS */
+        .worker-card {
+            text-align: center;
+        }
+
+        .worker-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px solid white;
+            box-shadow: 0 4px 15px rgba(45, 80, 22, 0.2);
+        }
+
+        body.dark-mode .worker-avatar {
+            border-color: var(--dark-card);
+        }
+
+        .worker-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.1), rgba(74, 124, 44, 0.1));
+            color: var(--primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        body.dark-mode .skill-tag {
+            background: rgba(244, 164, 96, 0.15);
+            color: var(--accent);
+        }
+
+        /* MATCHING RESULTS */
+        .matches-list {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .match-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 15px;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .match-item {
+            background: var(--dark-card);
+            border-left-color: var(--accent);
+        }
+
+        .match-item:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        body.dark-mode .match-item:hover {
+            box-shadow: 0 8px 25px rgba(244, 164, 96, 0.15);
+        }
+
+        .match-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .match-content {
+            flex: 1;
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .match-score {
+            background: linear-gradient(135deg, var(--success), #2ecc71);
+            color: white;
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s;
+        }
+
+        body.dark-mode .modal-content {
+            background: var(--dark-card);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .close-btn:hover {
+            color: var(--primary);
+        }
+
+        .success-icon {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-icon i {
+            font-size: 3rem;
+            color: var(--success);
+        }
+
+        .connection-details {
+            background: rgba(45, 80, 22, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        body.dark-mode .connection-details {
+            background: rgba(244, 164, 96, 0.1);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .detail-row {
+            border-bottom-color: rgba(244, 164, 96, 0.1);
+        }
+
+        .contact-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-actions button {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .contact-actions .whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .contact-actions .call {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--text-light);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        body.dark-mode footer {
+            background: #000;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+        }
+
+        /* ABOUT SECTION */
+        .about-section {
+            padding: 4rem 2rem;
+            background: white;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        body.dark-mode .about-section {
+            background: var(--dark-bg);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        body.dark-mode .about-text p {
+            color: #aaa;
+        }
+
+        .impact-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .impact-list li {
+            padding: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .impact-list i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* NOTIFICATION */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            animation: slideIn 0.3s;
+            z-index: 3000;
+        }
+
+        body.dark-mode .notification {
+            background: var(--dark-card);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .notification.success i {
+            color: var(--success);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links.show {
+                display: flex;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+            }
+
+            body.dark-mode .nav-links.show {
+                background: rgba(15, 20, 25, 0.98);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .match-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .match-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .tabs {
+                gap: 0;
+            }
+
+            .tab-button {
+                padding: 0.8rem 0.5rem;
+                font-size: 0.85rem;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .filter-input {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .stat-icon {
+                font-size: 2rem;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* LOADING ANIMATION */
+        .spinner {
+            border: 4px solid rgba(45, 80, 22, 0.2);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state p {
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        /* ADMIN DASHBOARD */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark-mode .dashboard-card {
+            background: var(--dark-card);
+        }
+
+        .dashboard-card h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .data-table thead {
+            background: rgba(45, 80, 22, 0.05);
+        }
+
+        body.dark-mode .data-table thead {
+            background: rgba(244, 164, 96, 0.1);
+        }
+
+        .data-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table tr:hover {
+            background: rgba(45, 80, 22, 0.05);
+        }
+
+        body.dark-mode .data-table tr:hover {
+            background: rgba(244, 164, 96, 0.1);
+        }
+
+        /* RATINGS */
+        .rating {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .star {
+            color: #ddd;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .star.active,
+        .star:hover {
+            color: var(--accent);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        body.dark-mode .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-logo" onclick="scrollToSection('hero')">🌾 Rural Worker Connect</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" onclick="scrollToSection('hero'); return false;">Home</a></li>
+            <li><a href="#" onclick="showTab('jobs-tab'); return false;">Jobs</a></li>
+            <li><a href="#" onclick="showTab('workers-tab'); return false;">Workers</a></li>
+            <li><a href="#" onclick="scrollToSection('about'); return false;">About</a></li>
+            <li><a href="#" onclick="scrollToSection('contact'); return false;">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+            <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" onclick="toggleMobileMenu()" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Connecting Farmers & Rural Workers</h1>
+            <p>Find the right talent for your farm. Find meaningful work in your village. All on one platform.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="showTab('register-workers-tab')">
+                    <i class="fas fa-user-plus"></i> Register as Worker
+                </button>
+                <button class="btn btn-secondary" onclick="showTab('post-jobs-tab')">
+                    <i class="fas fa-briefcase"></i> Post a Job
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATISTICS -->
+    <section class="stats-section">
+        <h2 class="section-title">Our Impact</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-users stat-icon"></i>
+                <div class="stat-number" id="totalWorkers">0</div>
+                <div class="stat-label">Workers Registered</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-briefcase stat-icon"></i>
+                <div class="stat-number" id="totalJobs">0</div>
+                <div class="stat-label">Jobs Posted</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-handshake stat-icon"></i>
+                <div class="stat-number" id="totalMatches">0</div>
+                <div class="stat-label">Active Connections</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-user-tie stat-icon"></i>
+                <div class="stat-number" id="totalEmployers">0</div>
+                <div class="stat-label">Employers</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star stat-icon"></i>
+                <div class="stat-number" id="successfulMatches">0</div>
+                <div class="stat-label">Successful Placements</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <section style="padding: 4rem 2rem; background: var(--light-bg);">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab-button active" onclick="showTab('register-workers-tab')">
+                    <i class="fas fa-user-plus"></i> Register Worker
+                </button>
+                <button class="tab-button" onclick="showTab('post-jobs-tab')">
+                    <i class="fas fa-briefcase"></i> Post Job
+                </button>
+                <button class="tab-button" onclick="showTab('jobs-tab')">
+                    <i class="fas fa-list"></i> Browse Jobs
+                </button>
+                <button class="tab-button" onclick="showTab('workers-tab')">
+                    <i class="fas fa-users"></i> Browse Workers
+                </button>
+                <button class="tab-button" onclick="showTab('admin-tab')">
+                    <i class="fas fa-chart-bar"></i> Admin Dashboard
+                </button>
+            </div>
+
+            <!-- REGISTER WORKER TAB -->
+            <div class="tab-content active" id="register-workers-tab">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2><i class="fas fa-user-plus"></i> Register as a Worker</h2>
+                        <p>Join thousands of workers finding meaningful employment</p>
+                    </div>
+                    <form id="workerForm" onsubmit="registerWorker(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="workerName">Full Name *</label>
+                                <input type="text" id="workerName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="workerPhone">Phone Number *</label>
+                                <input type="tel" id="workerPhone" pattern="[0-9]{10}" placeholder="10-digit number" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="workerAge">Age *</label>
+                                <input type="number" id="workerAge" min="18" max="80" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="workerGender">Gender *</label>
+                                <select id="workerGender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Skills (Select at least one) *</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="skills" value="Gardening" id="skill1">
+                                    <label for="skill1">🌱 Gardening</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="skills" value="Plantation" id="skill2">
+                                    <label for="skill2">🌾 Plantation</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="skills" value="Harvesting" id="skill3">
+                                    <label for="skill3">🌽 Harvesting</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="skills" value="Irrigation" id="skill4">
+                                    <label for="skill4">💧 Irrigation</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="skills" value="Cattle Care" id="skill5">
+                                    <label for="skill5">🐄 Cattle Care</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="skills" value="Tractor Driving" id="skill6">
+                                    <label for="skill6">🚜 Tractor Driving</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="skills" value="Nut Peeling" id="skill7">
+                                    <label for="skill7">🥜 Nut Peeling</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="workerExperience">Years of Experience *</label>
+                                <input type="number" id="workerExperience" min="0" max="60" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="workerLocation">Village/Location *</label>
+                                <input type="text" id="workerLocation" placeholder="e.g., Doddaballapur" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="workerLanguages">Languages Known *</label>
+                            <input type="text" id="workerLanguages" placeholder="e.g., Kannada, Hindi, English" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="workerAvailability">Availability Status *</label>
+                            <select id="workerAvailability" required>
+                                <option value="">Select Availability</option>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Seasonal">Seasonal</option>
+                                <option value="Flexible">Flexible</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Profile Photo</label>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="workerPhoto" accept="image/*">
+                                <label for="workerPhoto" class="file-input-label">
+                                    <i class="fas fa-cloud-upload-alt"></i> Click or drag to upload photo
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-form btn-submit">
+                                <i class="fas fa-check"></i> Register
+                            </button>
+                            <button type="reset" class="btn-form btn-reset">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- POST JOB TAB -->
+            <div class="tab-content" id="post-jobs-tab">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2><i class="fas fa-briefcase"></i> Post a Job</h2>
+                        <p>Find the right workers for your farm quickly</p>
+                    </div>
+                    <form id="jobForm" onsubmit="postJob(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="employerName">Your Name *</label>
+                                <input type="text" id="employerName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="employerPhone">Your Phone *</label>
+                                <input type="tel" id="employerPhone" pattern="[0-9]{10}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="jobTitle">Job Title *</label>
+                                <input type="text" id="jobTitle" placeholder="e.g., Farm Helper" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobSkill">Required Skill *</label>
+                                <select id="jobSkill" required>
+                                    <option value="">Select Skill</option>
+                                    <option value="Gardening">Gardening</option>
+                                    <option value="Plantation">Plantation</option>
+                                    <option value="Harvesting">Harvesting</option>
+                                    <option value="Irrigation">Irrigation</option>
+                                    <option value="Cattle Care">Cattle Care</option>
+                                    <option value="Tractor Driving">Tractor Driving</option>
+                                    <option value="Nut Peeling">Nut Peeling</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobDescription">Job Description *</label>
+                            <textarea id="jobDescription" rows="4" placeholder="Describe the job, tasks, and expectations..." required></textarea>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="jobSalary">Salary / Payment (₹) *</label>
+                                <input type="number" id="jobSalary" min="0" placeholder="e.g., 500" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobLocation">Work Location *</label>
+                                <input type="text" id="jobLocation" placeholder="e.g., Doddaballapur" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="jobDuration">Duration *</label>
+                                <select id="jobDuration" required>
+                                    <option value="">Select Duration</option>
+                                    <option value="1 Day">1 Day</option>
+                                    <option value="Few Days">Few Days</option>
+                                    <option value="1 Week">1 Week</option>
+                                    <option value="2 Weeks">2 Weeks</option>
+                                    <option value="1 Month">1 Month</option>
+                                    <option value="Seasonal">Seasonal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobUrgency">Urgency Level *</label>
+                                <select id="jobUrgency" required>
+                                    <option value="">Select Urgency</option>
+                                    <option value="Immediate">Immediate</option>
+                                    <option value="This Week">This Week</option>
+                                    <option value="This Month">This Month</option>
+                                    <option value="Flexible">Flexible</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="jobDate">Start Date *</label>
+                                <input type="date" id="jobDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobTime">Start Time *</label>
+                                <input type="time" id="jobTime" required>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-form btn-submit">
+                                <i class="fas fa-check"></i> Post Job
+                            </button>
+                            <button type="reset" class="btn-form btn-reset">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- BROWSE JOBS TAB -->
+            <div class="tab-content" id="jobs-tab">
+                <div style="margin-bottom: 3rem;">
+                    <h2 class="section-title">Available Jobs</h2>
+                    
+                    <div class="filters">
+                        <input type="text" id="searchJobs" class="filter-input" placeholder="Search by skill or title...">
+                        <select id="filterLocation" class="filter-input">
+                            <option value="">All Locations</option>
+                            <option value="Doddaballapur">Doddaballapur</option>
+                            <option value="Kolar">Kolar</option>
+                            <option value="Chikkaballapur">Chikkaballapur</option>
+                            <option value="Tumkur">Tumkur</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <select id="filterSalary" class="filter-input">
+                            <option value="">All Salaries</option>
+                            <option value="0-500">0-500</option>
+                            <option value="500-1000">500-1000</option>
+                            <option value="1000-2000">1000-2000</option>
+                            <option value="2000+">2000+</option>
+                        </select>
+                        <button class="btn btn-primary btn-small" onclick="resetJobFilters()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+
+                    <div id="jobsContainer" class="cards-grid">
+                        <div class="empty-state">
+                            <i class="fas fa-briefcase"></i>
+                            <p>No jobs posted yet. Be the first to post a job!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BROWSE WORKERS TAB -->
+            <div class="tab-content" id="workers-tab">
+                <div style="margin-bottom: 3rem;">
+                    <h2 class="section-title">Available Workers</h2>
+
+                    <div class="filters">
+                        <input type="text" id="searchWorkers" class="filter-input" placeholder="Search by name or skill...">
+                        <select id="filterWorkerLocation" class="filter-input">
+                            <option value="">All Locations</option>
+                            <option value="Doddaballapur">Doddaballapur</option>
+                            <option value="Kolar">Kolar</option>
+                            <option value="Chikkaballapur">Chikkaballapur</option>
+                            <option value="Tumkur">Tumkur</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <select id="filterSkill" class="filter-input">
+                            <option value="">All Skills</option>
+                            <option value="Gardening">Gardening</option>
+                            <option value="Plantation">Plantation</option>
+                            <option value="Harvesting">Harvesting</option>
+                            <option value="Irrigation">Irrigation</option>
+                            <option value="Cattle Care">Cattle Care</option>
+                            <option value="Tractor Driving">Tractor Driving</option>
+                            <option value="Nut Peeling">Nut Peeling</option>
+                        </select>
+                        <button class="btn btn-primary btn-small" onclick="resetWorkerFilters()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+
+                    <div id="workersContainer" class="cards-grid">
+                        <div class="empty-state">
+                            <i class="fas fa-users"></i>
+                            <p>No workers registered yet. Encourage workers to register!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN DASHBOARD TAB -->
+            <div class="tab-content" id="admin-tab">
+                <h2 class="section-title">Admin Dashboard</h2>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-chart-line"></i> Platform Statistics</h3>
+                        <table class="data-table">
+                            <tr>
+                                <td>Total Workers</td>
+                                <td><strong id="adminWorkers">0</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Total Jobs</td>
+                                <td><strong id="adminJobs">0</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Total Matches</td>
+                                <td><strong id="adminMatches">0</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Unique Employers</td>
+                                <td><strong id="adminEmployers">0</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Success Rate</td>
+                                <td><strong id="successRate">0%</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-map-marker-alt"></i> Top Locations</h3>
+                        <div id="topLocations">
+                            <p style="color: #888;">No data yet</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-star"></i> Popular Skills</h3>
+                        <div id="popularSkills">
+                            <p style="color: #888;">No data yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-list"></i> All Registered Workers</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Skills</th>
+                                <th>Availability</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody id="workersTable">
+                            <tr><td colspan="5" style="text-align: center; color: #888;">No workers yet</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-briefcase"></i> All Posted Jobs</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Job Title</th>
+                                <th>Location</th>
+                                <th>Skill Required</th>
+                                <th>Salary (₹)</th>
+                                <th>Urgency</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jobsTable">
+                            <tr><td colspan="5" style="text-align: center; color: #888;">No jobs yet</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section" id="about">
+        <h2 class="section-title">Why Rural Worker Connect?</h2>
+        <div class="about-content">
+            <div class="about-image">🤝</div>
+            <div class="about-text">
+                <h3>Empowering Rural Communities</h3>
+                <p>Underemployment and lack of opportunity have long plagued rural areas. Farmers struggle to find skilled workers during critical seasons, while millions of rural residents lack stable employment.</p>
+                <p>Rural Worker Connect bridges this gap by creating a direct, transparent marketplace between farmers and workers.</p>
+                
+                <h3>Our Impact</h3>
+                <ul class="impact-list">
+                    <li>
+                        <i class="fas fa-briefcase"></i>
+                        <span><strong>Job Creation:</strong> Generate meaningful employment in rural areas</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-chart-line"></i>
+                        <span><strong>Income Growth:</strong> Increase earnings for rural workers</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-globe"></i>
+                        <span><strong>Digital Inclusion:</strong> Bring rural communities online</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-tractor"></i>
+                        <span><strong>Agricultural Productivity:</strong> Help farmers optimize labor</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-hands-helping"></i>
+                        <span><strong>Transparent System:</strong> Fair wages and working conditions</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section style="padding: 4rem 2rem; background: white;" id="contact">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <h2 class="section-title">Get in Touch</h2>
+            <p style="margin-bottom: 2rem; color: #666;">Have questions? We'd love to hear from you.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div style="padding: 2rem; background: rgba(45, 80, 22, 0.05); border-radius: 10px;">
+                    <i class="fas fa-phone" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h4>Call Us</h4>
+                    <p>+91 8765-432-1098</p>
+                </div>
+                <div style="padding: 2rem; background: rgba(45, 80, 22, 0.05); border-radius: 10px;">
+                    <i class="fas fa-envelope" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h4>Email Us</h4>
+                    <p>hello@ruralworkerconnect.com</p>
+                </div>
+                <div style="padding: 2rem; background: rgba(45, 80, 22, 0.05); border-radius: 10px;">
+                    <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h4>Location</h4>
+                    <p>Rural India (Service expanding)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🌾 Rural Worker Connect</h3>
+                <p>Connecting rural communities with opportunity and empowerment.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" onclick="scrollToSection('hero'); return false;">Home</a></li>
+                    <li><a href="#" onclick="showTab('jobs-tab'); return false;">Jobs</a></li>
+                    <li><a href="#" onclick="showTab('workers-tab'); return false;">Workers</a></li>
+                    <li><a href="#" onclick="scrollToSection('about'); return false;">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Rural Worker Connect. All rights reserved. | Built with <i class="fas fa-heart" style="color: var(--accent);"></i> for rural empowerment</p>
+        </div>
+    </footer>
+
+    <!-- CONNECTION MODAL -->
+    <div id="connectionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Connection Successful ✅</h2>
+                <button class="close-btn" onclick="closeModal('connectionModal')">&times;</button>
+            </div>
+            
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+
+            <div class="connection-details">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Worker Details</h3>
+                <div class="detail-row">
+                    <span>Name:</span>
+                    <strong id="connectedWorkerName">-</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Phone:</span>
+                    <strong id="connectedWorkerPhone">-</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Skills:</span>
+                    <strong id="connectedWorkerSkills">-</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Location:</span>
+                    <strong id="connectedWorkerLocation">-</strong>
+                </div>
+            </div>
+
+            <div class="connection-details">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Job Details</h3>
+                <div class="detail-row">
+                    <span>Job:</span>
+                    <strong id="connectedJobTitle">-</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Salary:</span>
+                    <strong id="connectedJobSalary">-</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Location:</span>
+                    <strong id="connectedJobLocation">-</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Date:</span>
+                    <strong id="connectedJobDate">-</strong>
+                </div>
+            </div>
+
+            <div class="contact-actions">
+                <button class="whatsapp" onclick="whatsappConnect()">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="call" onclick="callConnect()">
+                    <i class="fas fa-phone"></i> Call
+                </button>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="closeModal('connectionModal')">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ===== DATA STORAGE =====
+        const DATA_KEY = 'rwc_data';
+
+        let appData = {
+            workers: [],
+            jobs: [],
+            connections: [],
+            theme: 'light'
+        };
+
+        // Initialize data from localStorage
+        function initData() {
+            const stored = localStorage.getItem(DATA_KEY);
+            if (stored) {
+                appData = JSON.parse(stored);
+            }
+            applyTheme(appData.theme);
+            updateStatistics();
+            renderAllContent();
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem(DATA_KEY, JSON.stringify(appData));
+            updateStatistics();
+        }
+
+        // ===== THEME TOGGLE =====
+        function toggleTheme() {
+            appData.theme = appData.theme === 'light' ? 'dark' : 'light';
+            applyTheme(appData.theme);
+            saveData();
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+        }
+
+        // ===== NAVIGATION =====
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                closeMobileMenu();
+            }
+        }
+
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.getElementById('hamburger');
+            navLinks.classList.toggle('show');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('navLinks').classList.remove('show');
+            document.getElementById('hamburger').classList.remove('active');
+        }
+
+        // ===== TAB SYSTEM =====
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            const tab = document.getElementById(tabId);
+            if (tab) {
+                tab.classList.add('active');
+                
+                // Mark button as active
+                event?.target?.classList.add('active');
+                
+                // Scroll to content
+                setTimeout(() => {
+                    tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
+        // ===== WORKER REGISTRATION =====
+        function registerWorker(e) {
+            e.preventDefault();
+
+            // Collect skills
+            const skills = Array.from(document.querySelectorAll('input[name="skills"]:checked'))
+                .map(el => el.value);
+
+            if (skills.length === 0) {
+                alert('Please select at least one skill');
+                return;
+            }
+
+            const worker = {
+                id: Date.now(),
+                name: document.getElementById('workerName').value,
+                phone: document.getElementById('workerPhone').value,
+                age: parseInt(document.getElementById('workerAge').value),
+                gender: document.getElementById('workerGender').value,
+                skills: skills,
+                experience: parseInt(document.getElementById('workerExperience').value),
+                location: document.getElementById('workerLocation').value,
+                languages: document.getElementById('workerLanguages').value,
+                availability: document.getElementById('workerAvailability').value,
+                avatar: generateAvatar(),
+                registeredDate: new Date().toLocaleDateString()
+            };
+
+            appData.workers.push(worker);
+            saveData();
+
+            showNotification(`Welcome ${worker.name}! You've been registered successfully.`, 'success');
+            document.getElementById('workerForm').reset();
+            renderWorkers();
+        }
+
+        // ===== JOB POSTING =====
+        function postJob(e) {
+            e.preventDefault();
+
+            const job = {
+                id: Date.now(),
+                title: document.getElementById('jobTitle').value,
+                employerName: document.getElementById('employerName').value,
+                employerPhone: document.getElementById('employerPhone').value,
+                skill: document.getElementById('jobSkill').value,
+                description: document.getElementById('jobDescription').value,
+                salary: parseInt(document.getElementById('jobSalary').value),
+                location: document.getElementById('jobLocation').value,
+                duration: document.getElementById('jobDuration').value,
+                urgency: document.getElementById('jobUrgency').value,
+                date: document.getElementById('jobDate').value,
+                time: document.getElementById('jobTime').value,
+                postedDate: new Date().toLocaleDateString()
+            };
+
+            appData.jobs.push(job);
+            saveData();
+
+            showNotification(`Job "${job.title}" posted successfully! Workers can now apply.`, 'success');
+            document.getElementById('jobForm').reset();
+            renderJobs();
+        }
+
+        // ===== RENDER WORKERS =====
+        function renderWorkers(workersToRender = null) {
+            const workers = workersToRender || appData.workers;
+            const container = document.getElementById('workersContainer');
+
+            if (workers.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-users"></i>
+                        <p>No workers registered yet. Encourage workers to register!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = workers.map(worker => `
+                <div class="card worker-card">
+                    <div class="card-header">
+                        <div class="worker-avatar">${worker.avatar}</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">${worker.name}</h3>
+                        <div class="info-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${worker.location}</span>
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-briefcase"></i>
+                            <span>${worker.experience} years experience</span>
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-calendar"></i>
+                            <span>${worker.availability}</span>
+                        </div>
+                        <div class="skills-list">
+                            ${worker.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-phone"></i>
+                            <span>${worker.phone}</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-primary" onclick="editWorker(${worker.id})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn-outline" onclick="deleteWorker(${worker.id})">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===== RENDER JOBS =====
+        function renderJobs(jobsToRender = null) {
+            const jobs = jobsToRender || appData.jobs;
+            const container = document.getElementById('jobsContainer');
+
+            if (jobs.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-briefcase"></i>
+                        <p>No jobs posted yet. Be the first to post a job!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = jobs.map(job => {
+                const matches = findMatches(job);
+                return `
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">${job.title}</div>
+                            <div class="card-subtitle">${job.employerName}</div>
+                        </div>
+                        <div class="card-body">
+                            <span class="badge">${job.skill}</span>
+                            <span class="badge">${job.urgency}</span>
+                            
+                            <div class="info-row">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${job.location}</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-rupee-sign"></i>
+                                <span>₹${job.salary} / ${job.duration}</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-calendar"></i>
+                                <span>${job.date} at ${job.time}</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-file-alt"></i>
+                                <span>${job.description.substring(0, 50)}...</span>
+                            </div>
+                            
+                            ${matches.length > 0 ? `
+                                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.1);">
+                                    <strong>Best Match:</strong> ${matches[0].name}
+                                    <span class="match-percentage">${matches[0].matchScore}% Match</span>
+                                </div>
+                            ` : ''}
+                            
+                            <div class="card-actions">
+                                <button class="btn-primary" onclick="viewJobMatches(${job.id})">
+                                    <i class="fas fa-search"></i> View Matches
+                                </button>
+                                <button class="btn-outline" onclick="deleteJob(${job.id})">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ===== MATCHING SYSTEM =====
+        function findMatches(job) {
+            return appData.workers
+                .filter(worker => worker.skills.includes(job.skill))
+                .map(worker => ({
+                    ...worker,
+                    matchScore: calculateMatchScore(worker, job)
+                }))
+                .sort((a, b) => b.matchScore - a.matchScore)
+                .slice(0, 5);
+        }
+
+        function calculateMatchScore(worker, job) {
+            let score = 50; // Base score
+
+            // Skill match
+            if (worker.skills.includes(job.skill)) {
+                score += 30;
+            }
+
+            // Location match
+            if (worker.location.toLowerCase() === job.location.toLowerCase()) {
+                score += 15;
+            }
+
+            // Experience bonus
+            if (worker.experience >= 2) {
+                score += 5;
+            }
+
+            return Math.min(score, 100);
+        }
+
+        function viewJobMatches(jobId) {
+            const job = appData.jobs.find(j => j.id === jobId);
+            if (!job) return;
+
+            const matches = findMatches(job);
+            const container = document.getElementById('jobsContainer');
+
+            if (matches.length === 0) {
+                alert('No matching workers found for this job yet.');
+                return;
+            }
+
+            container.innerHTML = `
+                <div style="grid-column: 1 / -1; margin-bottom: 2rem;">
+                    <button class="btn btn-outline" onclick="renderJobs()">
+                        <i class="fas fa-arrow-left"></i> Back to Jobs
+                    </button>
+                </div>
+                
+                <div style="grid-column: 1 / -1;">
+                    <h3 style="margin-bottom: 2rem; color: var(--primary);">Matching Workers for "${job.title}"</h3>
+                    <div class="matches-list">
+                        ${matches.map(match => `
+                            <div class="match-item">
+                                <div class="match-avatar">${match.avatar}</div>
+                                <div class="match-content">
+                                    <div class="match-header">
+                                        <div>
+                                            <h4 style="margin: 0; color: var(--primary);">${match.name}</h4>
+                                            <small style="color: #888;">${match.location}</small>
+                                        </div>
+                                        <span class="match-score">${match.matchScore}% Match</span>
+                                    </div>
+                                    <div style="margin-top: 0.8rem;">
+                                        <strong>Skills:</strong> ${match.skills.join(', ')}
+                                    </div>
+                                    <div style="margin-top: 0.5rem;">
+                                        <strong>Experience:</strong> ${match.experience} years
+                                    </div>
+                                    <div style="margin-top: 0.5rem;">
+                                        <strong>Availability:</strong> ${match.availability}
+                                    </div>
+                                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-primary btn-small" onclick="createConnection(${job.id}, ${match.id})">
+                                            <i class="fas fa-handshake"></i> Connect
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // ===== CONNECTION SYSTEM =====
+        function createConnection(jobId, workerId) {
+            const job = appData.jobs.find(j => j.id === jobId);
+            const worker = appData.workers.find(w => w.id === workerId);
+
+            if (!job || !worker) return;
+
+            const connection = {
+                id: Date.now(),
+                jobId: jobId,
+                workerId: workerId,
+                date: new Date().toLocaleDateString(),
+                status: 'active'
+            };
+
+            appData.connections.push(connection);
+            saveData();
+
+            showConnectionModal(worker, job);
+        }
+
+        function showConnectionModal(worker, job) {
+            document.getElementById('connectedWorkerName').textContent = worker.name;
+            document.getElementById('connectedWorkerPhone').textContent = worker.phone;
+            document.getElementById('connectedWorkerSkills').textContent = worker.skills.join(', ');
+            document.getElementById('connectedWorkerLocation').textContent = worker.location;
+            document.getElementById('connectedJobTitle').textContent = job.title;
+            document.getElementById('connectedJobSalary').textContent = `₹${job.salary}`;
+            document.getElementById('connectedJobLocation').textContent = job.location;
+            document.getElementById('connectedJobDate').textContent = job.date;
+
+            // Store current connection data for contact actions
+            window.currentConnection = { worker, job };
+
+            openModal('connectionModal');
+        }
+
+        function whatsappConnect() {
+            const { worker } = window.currentConnection;
+            const message = `Hi! I'm interested in working with you. Let's connect!`;
+            window.open(`https://wa.me/${worker.phone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function callConnect() {
+            const { worker } = window.currentConnection;
+            window.location.href = `tel:${worker.phone}`;
+        }
+
+        // ===== MODAL FUNCTIONS =====
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('show');
+            }
+        };
+
+        // ===== DELETE FUNCTIONS =====
+        function deleteWorker(workerId) {
+            if (confirm('Are you sure you want to delete this worker profile?')) {
+                appData.workers = appData.workers.filter(w => w.id !== workerId);
+                saveData();
+                renderWorkers();
+                showNotification('Worker profile deleted.', 'success');
+            }
+        }
+
+        function deleteJob(jobId) {
+            if (confirm('Are you sure you want to delete this job posting?')) {
+                appData.jobs = appData.jobs.filter(j => j.id !== jobId);
+                appData.connections = appData.connections.filter(c => c.jobId !== jobId);
+                saveData();
+                renderJobs();
+                showNotification('Job posting deleted.', 'success');
+            }
+        }
+
+        function editWorker(workerId) {
+            const worker = appData.workers.find(w => w.id === workerId);
+            if (!worker) return;
+
+            alert(`Edit mode for ${worker.name}\n\nThis feature will allow full editing of worker profiles.`);
+        }
+
+        // ===== FILTER FUNCTIONS =====
+        function resetJobFilters() {
+            document.getElementById('searchJobs').value = '';
+            document.getElementById('filterLocation').value = '';
+            document.getElementById('filterSalary').value = '';
+            renderJobs();
+        }
+
+        function resetWorkerFilters() {
+            document.getElementById('searchWorkers').value = '';
+            document.getElementById('filterWorkerLocation').value = '';
+            document.getElementById('filterSkill').value = '';
+            renderWorkers();
+        }
+
+        // Add event listeners for filters
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('searchJobs')?.addEventListener('input', filterJobs);
+            document.getElementById('filterLocation')?.addEventListener('change', filterJobs);
+            document.getElementById('filterSalary')?.addEventListener('change', filterJobs);
+            
+            document.getElementById('searchWorkers')?.addEventListener('input', filterWorkers);
+            document.getElementById('filterWorkerLocation')?.addEventListener('change', filterWorkers);
+            document.getElementById('filterSkill')?.addEventListener('change', filterWorkers);
+        });
+
+        function filterJobs() {
+            const search = document.getElementById('searchJobs').value.toLowerCase();
+            const location = document.getElementById('filterLocation').value;
+            const salary = document.getElementById('filterSalary').value;
+
+            const filtered = appData.jobs.filter(job => {
+                const matchesSearch = job.title.toLowerCase().includes(search) || 
+                                     job.skill.toLowerCase().includes(search);
+                const matchesLocation = !location || job.location === location;
+                const matchesSalary = !salary || checkSalaryRange(job.salary, salary);
+                return matchesSearch && matchesLocation && matchesSalary;
+            });
+
+            renderJobs(filtered);
+        }
+
+        function filterWorkers() {
+            const search = document.getElementById('searchWorkers').value.toLowerCase();
+            const location = document.getElementById('filterWorkerLocation').value;
+            const skill = document.getElementById('filterSkill').value;
+
+            const filtered = appData.workers.filter(worker => {
+                const matchesSearch = worker.name.toLowerCase().includes(search) || 
+                                     worker.skills.some(s => s.toLowerCase().includes(search));
+                const matchesLocation = !location || worker.location === location;
+                const matchesSkill = !skill || worker.skills.includes(skill);
+                return matchesSearch && matchesLocation && matchesSkill;
+            });
+
+            renderWorkers(filtered);
+        }
+
+        function checkSalaryRange(salary, range) {
+            if (range === '0-500') return salary <= 500;
+            if (range === '500-1000') return salary > 500 && salary <= 1000;
+            if (range === '1000-2000') return salary > 1000 && salary <= 2000;
+            if (range === '2000+') return salary > 2000;
+            return true;
+        }
+
+        // ===== STATISTICS =====
+        function updateStatistics() {
+            const totalWorkers = appData.workers.length;
+            const totalJobs = appData.jobs.length;
+            const totalMatches = appData.connections.length;
+            const uniqueEmployers = new Set(appData.jobs.map(j => j.employerName)).size;
+            const successRate = totalJobs > 0 ? Math.round((totalMatches / totalJobs) * 100) : 0;
+
+            // Update stat cards
+            document.getElementById('totalWorkers').textContent = totalWorkers;
+            document.getElementById('totalJobs').textContent = totalJobs;
+            document.getElementById('totalMatches').textContent = totalMatches;
+            document.getElementById('totalEmployers').textContent = uniqueEmployers;
+            document.getElementById('successfulMatches').textContent = totalMatches;
+
+            // Update admin dashboard
+            document.getElementById('adminWorkers').textContent = totalWorkers;
+            document.getElementById('adminJobs').textContent = totalJobs;
+            document.getElementById('adminMatches').textContent = totalMatches;
+            document.getElementById('adminEmployers').textContent = uniqueEmployers;
+            document.getElementById('successRate').textContent = successRate + '%';
+
+            updateAdminTables();
+            updateAnalytics();
+        }
+
+        function updateAdminTables() {
+            // Workers table
+            const workersTable = document.getElementById('workersTable');
+            if (appData.workers.length === 0) {
+                workersTable.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #888;">No workers yet</td></tr>';
+            } else {
+                workersTable.innerHTML = appData.workers.map(w => `
+                    <tr>
+                        <td><strong>${w.name}</strong></td>
+                        <td>${w.location}</td>
+                        <td>${w.skills.slice(0, 2).join(', ')}</td>
+                        <td>${w.availability}</td>
+                        <td>${w.phone}</td>
+                    </tr>
+                `).join('');
+            }
+
+            // Jobs table
+            const jobsTable = document.getElementById('jobsTable');
+            if (appData.jobs.length === 0) {
+                jobsTable.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #888;">No jobs yet</td></tr>';
+            } else {
+                jobsTable.innerHTML = appData.jobs.map(j => `
+                    <tr>
+                        <td><strong>${j.title}</strong></td>
+                        <td>${j.location}</td>
+                        <td>${j.skill}</td>
+                        <td>₹${j.salary}</td>
+                        <td><span class="badge">${j.urgency}</span></td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        function updateAnalytics() {
+            // Top locations
+            const locations = {};
+            appData.workers.forEach(w => {
+                locations[w.location] = (locations[w.location] || 0) + 1;
+            });
+            const topLocations = Object.entries(locations)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+
+            const locationsDiv = document.getElementById('topLocations');
+            if (topLocations.length === 0) {
+                locationsDiv.innerHTML = '<p style="color: #888;">No data yet</p>';
+            } else {
+                locationsDiv.innerHTML = topLocations.map(([loc, count]) => `
+                    <div style="margin-bottom: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+                            <span>${loc}</span>
+                            <strong>${count}</strong>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${(count / Math.max(...topLocations.map(x => x[1]))) * 100}%"></div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Popular skills
+            const skills = {};
+            appData.workers.forEach(w => {
+                w.skills.forEach(skill => {
+                    skills[skill] = (skills[skill] || 0) + 1;
+                });
+            });
+            const topSkills = Object.entries(skills)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+
+            const skillsDiv = document.getElementById('popularSkills');
+            if (topSkills.length === 0) {
+                skillsDiv.innerHTML = '<p style="color: #888;">No data yet</p>';
+            } else {
+                skillsDiv.innerHTML = topSkills.map(([skill, count]) => `
+                    <div style="margin-bottom: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+                            <span>${skill}</span>
+                            <strong>${count}</strong>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${(count / Math.max(...topSkills.map(x => x[1]))) * 100}%"></div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ===== UTILITY FUNCTIONS =====
+        function generateAvatar() {
+            const emojis = ['👨‍🌾', '👩‍🌾', '🧑‍🌾', '👨‍💼', '👩‍💼'];
+            return emojis[Math.floor(Math.random() * emojis.length)];
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <p style="margin: 0.5rem 0 0 0;">${message}</p>
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s reverse';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        function renderAllContent() {
+            renderWorkers();
+            renderJobs();
+        }
+
+        // ===== INITIALIZE APP =====
+        window.addEventListener('load', initData);
+
+        // Demo Data (Optional - uncomment to see sample data)
+        function loadDemoData() {
+            appData.workers = [
+                {
+                    id: 1001,
+                    name: "Ramesh Kumar",
+                    phone: "9876543210",
+                    age: 35,
+                    gender: "male",
+                    skills: ["Gardening", "Plantation", "Harvesting"],
+                    experience: 8,
+                    location: "Doddaballapur",
+                    languages: "Kannada, Hindi",
+                    availability: "Full-time",
+                    avatar: "👨‍🌾",
+                    registeredDate: new Date().toLocaleDateString()
+                },
+                {
+                    id: 1002,
+                    name: "Lakshmi Devi",
+                    phone: "9876543211",
+                    age: 28,
+                    gender: "female",
+                    skills: ["Nut Peeling", "Irrigation", "Gardening"],
+                    experience: 5,
+                    location: "Kolar",
+                    languages: "Kannada, Tamil",
+                    availability: "Part-time",
+                    avatar: "👩‍🌾",
+                    registeredDate: new Date().toLocaleDateString()
+                },
+                {
+                    id: 1003,
+                    name: "Suresh Reddy",
+                    phone: "9876543212",
+                    age: 42,
+                    gender: "male",
+                    skills: ["Tractor Driving", "Harvesting", "Cattle Care"],
+                    experience: 12,
+                    location: "Tumkur",
+                    languages: "Kannada, Telugu",
+                    availability: "Flexible",
+                    avatar: "👨‍🌾",
+                    registeredDate: new Date().toLocaleDateString()
+                }
+            ];
+
+            appData.jobs = [
+                {
+                    id: 2001,
+                    title: "Farm Helper",
+                    employerName: "Farmer Nagesha",
+                    employerPhone: "9988776655",
+                    skill: "Gardening",
+                    description: "Needed for daily gardening work and plant maintenance",
+                    salary: 600,
+                    location: "Doddaballapur",
+                    duration: "1 Month",
+                    urgency: "Immediate",
+                    date: "2024-01-25",
+                    time: "06:00",
+                    postedDate: new Date().toLocaleDateString()
+                },
+                {
+                    id: 2002,
+                    title: "Harvest Workers",
+                    employerName: "Farmer Sharma",
+                    employerPhone: "9988776654",
+                    skill: "Harvesting",
+                    description: "Need skilled workers for sugarcane harvesting. Good pay.",
+                    salary: 1000,
+                    location: "Kolar",
+                    duration: "2 Weeks",
+                    urgency: "Urgent",
+                    date: "2024-01-22",
+                    time: "05:30",
+                    postedDate: new Date().toLocaleDateString()
+                }
+            ];
+
+            saveData();
+            location.reload();
+        }
+
+        // Uncomment below to load demo data on first visit
+        // if (appData.workers.length === 0 && appData.jobs.length === 0) {
+        //     loadDemoData();
+        // }
+    </script>
+</body>
+</html>
