@@ -2878,5 +2878,21 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
         //     loadDemoData();
         // }
     </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyB9_xb4P_A9pTbanLipctKn-sQ-....",   
+ authDomain: "rural-worker-connect-1d561.firebaseapp.com",
+ projectId: "rural-worker-connect-1d561",
+ storageBucket: "rural-worker-connect-1d561.appspot.com",
+ messagingSenderId: "84069139453",
+ appId: "1:84069139453:web:d94f9544a71ac9..."      
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+</script>
 </body>
 </html>
