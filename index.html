@@ -2274,7 +2274,7 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
             };
 
            try {
-   await addDoc(collection(db,"workers"), worker);
+   await addDoc(collection(window,db,"workers"), worker);
    console.log("Saved to Firebase");
 }
 catch(error){
@@ -2916,9 +2916,8 @@ const firebaseConfig = {
  messagingSenderId: "84069139453",
  appId:"1:84069139453:web:d94f9544a71ac9b4038f94"      
 };
-
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+window.db = getFirestore(app);
 
 loadWorkers();
 </script>
