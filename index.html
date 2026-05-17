@@ -2273,8 +2273,13 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
                 postedDate: new Date().toLocaleDateString()
             };
 
-            appData.jobs.push(job);
-            saveData();
+            addDoc(collection(db,"workers"), worker);
+
+showNotification(`Welcome ${worker.name}! You've been registered successfully.`, 'success');
+
+document.getElementById('workerForm').reset();
+
+renderWorkers();
 
             showNotification(`Job "${job.title}" posted successfully! Workers can now apply.`, 'success');
             document.getElementById('jobForm').reset();
@@ -2880,7 +2885,8 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
     </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
  apiKey: "AIzaSyB9_xb4P_A9pTbanLipctKn-sQ-tIsHmIU",   
