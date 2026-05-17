@@ -2287,7 +2287,18 @@ renderWorkers();
         }
 
         // ===== RENDER WORKERS =====
-        function renderWorkers(workersToRender = null) {
+        async function loadWorkers() {
+   const querySnapshot = await getDocs(collection(db,"workers"));
+
+   appData.workers = [];
+
+   querySnapshot.forEach((doc)=>{
+      appData.workers.push(doc.data());
+   });
+
+   renderWorkers();
+}
+function renderWorkers(workersToRender = null) {
             const workers = workersToRender || appData.workers;
             const container = document.getElementById('workersContainer');
 
@@ -2599,7 +2610,9 @@ renderWorkers();
         }
 
         // Add event listeners for filters
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function(){
+loadWorkers();
+ 
             document.getElementById('searchJobs')?.addEventListener('input', filterJobs);
             document.getElementById('filterLocation')?.addEventListener('change', filterJobs);
             document.getElementById('filterSalary')?.addEventListener('change', filterJobs);
@@ -2885,7 +2898,7 @@ renderWorkers();
     </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc }
+import { getFirestore, collection, addDoc, getDocs }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -2899,6 +2912,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+loadWorkers();
 </script>
 </body>
 </html>
