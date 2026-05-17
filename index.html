@@ -2218,7 +2218,7 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
         }
 
         // ===== WORKER REGISTRATION =====
-        function registerWorker(e) {
+        async function registerWorker(e) {
             e.preventDefault();
 
             // Collect skills
@@ -2273,7 +2273,7 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
                 postedDate: new Date().toLocaleDateString()
             };
 
-            addDoc(collection(db,"workers"), worker);
+           await addDoc(collection(db,"workers"), worker);
 
 showNotification(`Welcome ${worker.name}! You've been registered successfully.`, 'success');
 
