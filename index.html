@@ -2274,7 +2274,12 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
             };
 
            try {
-   await addDoc(collection(window,db,"workers"), worker);
+   const result = await addDoc(
+    collection(window.db,"workers"),
+    worker
+);
+
+alert("Saved ID: " + result.id);
    console.log("Saved to Firebase");
 }
 catch(error){
