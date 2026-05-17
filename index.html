@@ -2273,7 +2273,14 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
                 postedDate: new Date().toLocaleDateString()
             };
 
-           await addDoc(collection(db,"workers"), worker);
+           try {
+   await addDoc(collection(db,"workers"), worker);
+   console.log("Saved to Firebase");
+}
+catch(error){
+   console.log("Firebase error:", error);
+   alert(error.message);
+}
 
 showNotification(`Welcome ${worker.name}! You've been registered successfully.`, 'success');
 
