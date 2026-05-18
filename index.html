@@ -2297,7 +2297,7 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
         // ===== RENDER WORKERS =====
  async function loadWorkers() {
    const querySnapshot = await window.getDocs(
-   window.collection(window.db,"workers"));
+   collection(window.db,"workers"));
 
    appData.workers = [];
 
