@@ -2245,10 +2245,26 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
                 registeredDate: new Date().toLocaleDateString()
             };
 
-            appData.workers.push(worker);
-            saveData();
+            try {
+    const result = await addDoc(
+        collection(window.db, "workers"),
+        worker
+    );
 
-            showNotification(`Welcome ${worker.name}! You've been registered successfully.`, 'success');
+    alert("Saved ID: " + result.id);
+
+    showNotification(
+        `Welcome ${worker.name}! You've been registered successfully.`,
+        'success'
+    );
+
+    document.getElementById('workerForm').reset();
+
+    await loadWorkers();
+
+} catch(error){
+    alert("Firebase Error: " + error.message);
+}
             document.getElementById('workerForm').reset();
             await loadWorkers();
         }
@@ -2272,26 +2288,6 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
                 time: document.getElementById('jobTime').value,
                 postedDate: new Date().toLocaleDateString()
             };
-
-           try {
-    const result = await addDoc(
-        collection(window.db, "workers"),
-        worker
-    );
-
-    alert("Saved ID: " + result.id);
-    console.log("Saved to Firebase");
-
-} catch(error){
-    console.log("Firebase error:", error);
-    alert(error.message);
-}
-
-showNotification(`Welcome ${worker.name}! You've been registered successfully.`, 'success');
-
-document.getElementById('workerForm').reset();
-
-renderWorkers();
 
             showNotification(`Job "${job.title}" posted successfully! Workers can now apply.`, 'success');
             document.getElementById('jobForm').reset();
