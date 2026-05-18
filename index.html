@@ -2250,7 +2250,7 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
 
             showNotification(`Welcome ${worker.name}! You've been registered successfully.`, 'success');
             document.getElementById('workerForm').reset();
-            renderWorkers();
+            await loadWorkers();
         }
 
         // ===== JOB POSTING =====
