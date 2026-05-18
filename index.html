@@ -2299,8 +2299,9 @@ renderWorkers();
         }
 
         // ===== RENDER WORKERS =====
-        async function loadWorkers() {
-   const querySnapshot = await getDocs(collection(db,"workers"));
+ async function loadWorkers() {
+   const querySnapshot = await getDocs(
+   collection(window.db,"workers"));
 
    appData.workers = [];
 
