@@ -2246,10 +2246,10 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
             };
 
             try {
-    const result = await addDoc(
-        collection(window.db, "workers"),
-        worker
-    );
+    const result = await window.addDoc(
+    window.collection(window.db,"workers"),
+    worker
+);
 
     alert("Saved ID: " + result.id);
 
@@ -2907,8 +2907,12 @@ loadWorkers();
     </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { 
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
  apiKey: "AIzaSyB9_xb4P_A9pTbanLipctKn-sQ-tIsHmIU",   
@@ -2919,7 +2923,11 @@ const firebaseConfig = {
  appId:"1:84069139453:web:d94f9544a71ac9b4038f94"      
 };
 const app = initializeApp(firebaseConfig);
+
 window.db = getFirestore(app);
+window.addDoc = addDoc;
+window.collection = collection;
+window.getDocs = getDocs;
 
 loadWorkers();
 </script>
