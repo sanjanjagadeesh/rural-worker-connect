@@ -2274,17 +2274,17 @@ rural_worker_connect" title="Instagram"><i class="fab fa-instagram"></i></a>
             };
 
            try {
-   const result = await addDoc(
-    collection(window.db,"workers"),
-    worker
-);
+    const result = await addDoc(
+        collection(window.db, "workers"),
+        worker
+    );
 
-alert("Saved ID: " + result.id);
-   console.log("Saved to Firebase");
-}
-catch(error){
-   console.log("Firebase error:", error);
-   alert(error.message);
+    alert("Saved ID: " + result.id);
+    console.log("Saved to Firebase");
+
+} catch(error){
+    console.log("Firebase error:", error);
+    alert(error.message);
 }
 
 showNotification(`Welcome ${worker.name}! You've been registered successfully.`, 'success');
